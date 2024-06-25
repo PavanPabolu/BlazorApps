@@ -1,5 +1,6 @@
 ﻿using BlazorApp.Client.ConsumeAPI.Models;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace BlazorApp.Client.ConsumeAPI.Services
 {
@@ -16,7 +17,8 @@ namespace BlazorApp.Client.ConsumeAPI.Services
         {
             var response = await _httpClient.GetAsync("/WeatherForecast");
             response.EnsureSuccessStatusCode();
-            //return await response.Content.ReadAsStringAsync();
+            //var responseContent = await response.Content.ReadAsStringAsync();
+            //var weatherForecast = JsonSerializer.Deserialize<WeatherForecast>(responseContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             var res =  await _httpClient.GetFromJsonAsync<WeatherForecast[]>("/WeatherForecast");//"api/weatherforecast");
             return res;

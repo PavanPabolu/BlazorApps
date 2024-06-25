@@ -12,6 +12,7 @@
 <h1>Fetch Data of Weather Forecast</h1>
 
 <p> This component demonstrates fetching data from a service.</p>
+<button @onclick="getData">Refresh</button>
 
 @if (forecasts == null)
 {
@@ -48,6 +49,12 @@ else
     private WeatherForecast[] forecasts;
 
     protected override async Task OnInitializedAsync()
+    {
+        //forecasts = await _service.GetWeatherForecastsAsync();
+        await getData();
+    }
+
+    protected async Task getData()
     {
         forecasts = await _service.GetWeatherForecastsAsync();
     }
